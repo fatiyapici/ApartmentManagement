@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ApartmentManagement.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MvcInvoiceContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("MvcInvoiceContext") ?? throw new InvalidOperationException("Connection string 'MvcInvoiceContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
